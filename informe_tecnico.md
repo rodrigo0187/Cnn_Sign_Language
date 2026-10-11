@@ -1,0 +1,104 @@
+# Implementación de una CNN para el reconocimiento de Lengua de señas
+
+**Asignatura:** TLY1102
+
+**Integrantes:** Rodrigo Aedo, Benjamin Figueroa, Martina López.
+
+**Docente:** Jazna Meza
+
+
+# 1. Introducción 
+Este proyecto tiene como objetivo implementar una Red Neuronal Convolucional ($CNN$) para la clasificación de imágenes del alfabeto de lengua de señas utilizando el conjunto de datos $"Sign$ $Language$ $MNIST"$.
+
+En este trabajo se continúa el desarrollo realizado durante la Evaluación 1, en la cual se implementó una red neuronal de Perceptrón Multicapa ($MLP$) para la resolución del mismo problema de clasificación.
+
+Se busca procesar y evaluar el desempeño del modelo CNN, mediante capas convolucionales y capas de pooling para luego comparar los resultados con los obtenidos mediante el MLP y asi identificar diferencias entre ambas arquitecturas.
+
+## 1.1 Objetivo general
+El objetivo es implementar y evaluar una Red Neuronal Convolucional utilizando TensorFlow/Keras para clasificar imágenes y comparar su desempeño con el MLP desarrollado anteriormente.
+
+## 1.2 Objetivos específicos
+* Preparar las imágenes del dataset para su procesamiento.
+* Diseñar una arquitectura utilizando capas convolucionales, pooling y capas densas.
+* Entrenar y observar el comportamiento del modelo.
+* Evaluar los resultados mediante métricas.
+* Comparar el rendimiento de la CNN con el MLP.
+* Visualizar e interpretar los mapas de características.
+
+# Descripción y preparación del dataset
+Se utilizo el conjunto de datos $Sign$ $Language$ $MNIST$ para el desarrollo de este proyecto, compuesto por pixeles que corresponden a imágenes de manos que representan las letras del alfabeto de la lengua de señas americana.
+
+Las imágenes tienen una resolución de 28 x 28 píxeles que se encuentran en escala de grises. En el dataset se consideran 24 clases, excluyendo las letras $J$ y $Z$, las cuales requieren movimiento.
+
+Se escogio todo el abecedario para el desarrollo de reconocimiento de gestos.
+
+## 2.1 Carga y exploración de datos
+El dataset esta almacenado en archivos CSV correspondientes a entrenamiento y prueba.
+
+Cada fila contiene una etiqueta que representa la clase y 784 valores numéricos que corresponden a los pixeles de una imagen de 28 x 28.
+
+Se utiliza un $80$% de los datos originales para entrenamiento y un $20$% para validación. El conjunto de prueba se mantiene separado para evaluar el rendimiento final.
+
+## 2.2  Normalización y transformación de imágenes
+Se normalizan los píxeles dividiendolos por 255, transformando el rango de 0 a 255 a valores entre 0 y 1.
+
+Esta transformación permite trabajar con valores numéricos en una escala uniforme durante el entrenamiento.
+
+Despues se reorganizan las imágenes utilizando dimensiones de $28 x 28 x 1$, donde corresponde al canal de color de una imagen en una escala de grises.
+
+# 3. Diseño de la Red Neuronal Convolucional
+Se utilizan las siguientes capas en la arquitectura:
+
+| Capas | Configuración | Función |
+| --- | --- | --- |
+| Entrada | 28 x 28 x 1 | Recibir imágenes|
+| Conv2D | 64 filtros 3x3, ReLU | Extraer caracterísitcas |
+| MaxPooling2D | 2 x 2 | Reducir dimensiones espaciales |
+| Flatten | Transformación a vector | Preparación para las capas densas |
+| Dense | 128 neuronas, ReLU | Procesar características extraídas |
+| Dense | 24 neuronas, Softmax | Clasificar las imágenes en 24 clases |
+
+# 4. Entrenamiento del modelo
+El entrenamiento se realiza con los datos previamente normalizados y organizados.
+
+Para observar su comportamiento se registran los valores de Accuracy y Loss.
+
+## 4.1 Curvas de aprendizaje
+*(Insertar grafico de accuracy y loss)*
+
+## 4.2 Analisis del entrenamiento
+*(Describir comportamiento de accuracy y loss a lo largo de las epocas)*
+
+# 5. Evaluación del modelo CNN
+Para evaluar el rendimiento de la Red Neuronal Convolucional se utilizan las métricas de $Accuracy$, $Precision$, $Recall$ y $F1-Score$.
+
+Además se genera una matriz de confusión para identificar las letras clasificadas correctamente y en cuales fallo el reconocimiento.
+
+## 5.1 Métricas de clasificación 
+*(Insertar metricas)*
+
+## 5.2 Matriz de confusión
+*(Insertar matriz de confusión)*
+
+## 5.3 Analisis de predicción 
+*(Seleccionar ejemplos de imagenes clasificados correctamente e incorrectamente para ver el comportamiento del modelo)*
+
+# 6. Comparación entre MLP y CNN
+En la evaluación 1 se utilizó una red neuronal MLP, que recibía las imágenes transformadas en valores númericos, mientras que la red neuronal CNN procesa las imágenes conservando su estructura, permitiendo aplicar filtros para extraer características visuales.
+
+*(Insertar comparación entre metricas, el tipo de arquitectura y cantidad de parametros)*
+
+# 7. Visualización de mapa de características
+*(Insertar Feature Maps)*
+
+# 8. Matriz de responsabilidades
+| Integrantes | Responsabilidad |
+| --- | --- |
+| Rodrigo Aedo | (responsabilidad) |
+| Benjamin Figueroa | (responsabilidad) |
+| Martina López | (responsabilidad) |
+
+# 9. Conclusiones
+El desarrollo de este proyecto permite estudiar las Redes Neuronales Convolucionales en un problema de clasificación de imágenes de lengua de señas.
+
+*(Insertar continuacion de conclusiones acorde a los resultados de las metricas y a la comparacion de redes)*
