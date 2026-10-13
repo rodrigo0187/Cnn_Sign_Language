@@ -65,20 +65,22 @@ Para observar su comportamiento se registran los valores de Accuracy y Loss.
 
 ## 4.1 Curvas de aprendizaje
 *(Insertar grafico de accuracy y loss)*
+![alt text](image.png)
 
 ## 4.2 Analisis del entrenamiento
 *(Describir comportamiento de accuracy y loss a lo largo de las epocas)*
 
 # 5. Evaluación del modelo CNN
-Para evaluar el rendimiento de la Red Neuronal Convolucional se utilizan las métricas de $Accuracy$, $Precision$, $Recall$ y $F1-Score$.
-
-Además se genera una matriz de confusión para identificar las letras clasificadas correctamente y en cuales fallo el reconocimiento.
+Accuracy:   0.8299
+Precision: 0.8437
+Recall:    0.8299
+F1-Score:  0.8314
 
 ## 5.1 Métricas de clasificación 
 *(Insertar metricas)*
 
 ## 5.2 Matriz de confusión
-*(Insertar matriz de confusión)*
+![alt text](cm.png)
 
 ## 5.3 Analisis de predicción 
 *(Seleccionar ejemplos de imagenes clasificados correctamente e incorrectamente para ver el comportamiento del modelo)*

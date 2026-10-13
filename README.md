@@ -38,6 +38,9 @@ Cnn_Sign-Language/
 |   ├── amer_sign3.png
 |   └── american_sign_language.png
 |
+├── model/
+|   └── modelo_cnn.keras
+|
 ├── notebooks/
 |   └── CNN_sign.ipynb
 |
