@@ -64,10 +64,12 @@ El entrenamiento se realiza con los datos previamente normalizados y organizados
 Para observar su comportamiento se registran los valores de Accuracy y Loss.
 
 ## 4.1 Curvas de aprendizaje
-*(Insertar grafico de accuracy y loss)*
+![alt text](img/output.png)
 
 ## 4.2 Analisis del entrenamiento
-*(Describir comportamiento de accuracy y loss a lo largo de las epocas)*
+**loss:** El modelo está minimizando el error de manera rápida y eficiente. No hay indicios de overfitting en la pérdida, ya que la validación acompaña el descenso sin volverse a disparar.
+
+**accuracy:** La red aprendió de manera excelente los patrones espaciales (bordes, formas y posiciones de los dedos) característicos de las 24 clases del abecedario en lengua de señas.
 
 # 5. Evaluación del modelo CNN
 Para evaluar el rendimiento de la Red Neuronal Convolucional se utilizan las métricas de $Accuracy$, $Precision$, $Recall$ y $F1-Score$.
@@ -75,30 +77,57 @@ Para evaluar el rendimiento de la Red Neuronal Convolucional se utilizan las mé
 Además se genera una matriz de confusión para identificar las letras clasificadas correctamente y en cuales fallo el reconocimiento.
 
 ## 5.1 Métricas de clasificación 
-*(Insertar metricas)*
+
+Tras evaluar el modelo con el conjunto de prueba (7.172 imágenes independientes que no participaron en el entrenamiento), se obtuvieron los siguientes resultados de rendimiento global:
+
+* **Pérdida (Loss):** 0.8486
+* **Exactitud Global (Accuracy):** 81.22%
+* **Precisión Promedio (Precision - Macro Avg):** 83.00%
+* **Exhaustividad Promedio (Recall - Macro Avg):** 83.00%
+* **F1-Score Promedio (Macro Avg):** 83.00%
+* **F1-Score Ponderado (Weighted Avg):** 85.00%
+
+**Resumen del desempeño:**
+El modelo logra clasificar correctamente el 81.22% del total de las imágenes. Al analizar el equilibrio entre las predicciones correctas sobre el total de predicciones de una clase (Precisión) y la capacidad de encontrar todas las imágenes reales de dicha clase (Recall), el modelo mantiene un F1-Score general del 83%. 
+
+El hecho de que el F1-Score ponderado (85%) sea ligeramente superior al promedio macro (83%) indica que el modelo tiene un rendimiento un poco mejor en las clases que poseen mayor cantidad de muestras, pero mantiene un nivel de predicción robusto y equilibrado para la gran mayoría de las categorías del abecedario en lengua de señas.
 
 ## 5.2 Matriz de confusión
-*(Insertar matriz de confusión)*
+![alt text](img/image.png)
 
 ## 5.3 Analisis de predicción 
-*(Seleccionar ejemplos de imagenes clasificados correctamente e incorrectamente para ver el comportamiento del modelo)*
+![alt text](img/image-1.png)
 
 # 6. Comparación entre MLP y CNN
 En la evaluación 1 se utilizó una red neuronal MLP, que recibía las imágenes transformadas en valores númericos, mientras que la red neuronal CNN procesa las imágenes conservando su estructura, permitiendo aplicar filtros para extraer características visuales.
 
-*(Insertar comparación entre metricas, el tipo de arquitectura y cantidad de parametros)*
+![alt text](/img/comparasion.png)
+
+| Criterio | MLP | CNN |
+|---|---|---|
+| Desempeño en test | Inferior en las métricas obtenidas | Superior en las métricas obtenidas |
+| Parámetros entrenables | 110.296 | 1.388.312 |
+| Tiempo de inferencia medido | Menor (aprox. 0,2706 s por el lote) | Mayor (aprox. 0,6920 s por el lote) |
+| Tratamiento de la imagen | Aplana la imagen y aprende relaciones entre píxeles | Usa filtros convolucionales para extraer patrones espaciales |
+| Ventaja principal | Más liviano y rápido | Mejor desempeño para reconocer patrones visuales |
+| Desventaja principal | Pierde la estructura espacial explícita al aplanar la imagen | Mayor costo computacional y más parámetros |
 
 # 7. Visualización de mapa de características
-*(Insertar Feature Maps)*
+![alt text](/img/image-2.png)
+![alt text](/img/image-3.png)
 
 # 8. Matriz de responsabilidades
 | Integrantes | Responsabilidad |
 | --- | --- |
-| Rodrigo Aedo | (responsabilidad) |
-| Benjamin Figueroa | (responsabilidad) |
-| Martina López | (responsabilidad) |
+| Rodrigo Aedo | Preparación y Diseño de la Arquitectura |
+| Benjamin Figueroa | Experimentación y Entrenamiento |
+| Martina López | Aálisis y Documentación |
 
 # 9. Conclusiones
 El desarrollo de este proyecto permite estudiar las Redes Neuronales Convolucionales en un problema de clasificación de imágenes de lengua de señas.
 
-*(Insertar continuacion de conclusiones acorde a los resultados de las metricas y a la comparacion de redes)*
+A partir de los resultados obtenidos, se concluye que la arquitectura CNN implementada logró un desempeño sólido, alcanzando un accuracy del 81.22% y un F1-score promedio del 83% sobre datos de prueba nunca antes vistos. Esto demuestra que la red es altamente capaz de generalizar e identificar la mayoría de los patrones visuales correspondientes a las 24 clases del abecedario. Sin embargo, el análisis de la matriz de confusión también reveló que el modelo presenta un margen de mejora, ya que experimenta dificultades para diferenciar señas con similitudes espaciales muy finas (como las clases 16, 17, 19 y 21), a diferencia de otras señas visualmente más distintivas (como la clase 'A') donde el acierto es perfecto.
+
+Al comparar la CNN con la arquitectura de Perceptrón Multicapa (MLP) desarrollada en la primera evaluación, la ventaja del enfoque convolucional es evidente. Mientras que el modelo MLP requería aplanar (Flatten) la imagen desde la capa de entrada (perdiendo valiosa información sobre la proximidad y distribución espacial de los píxeles), la CNN logró extraer automáticamente características clave como bordes, texturas y la forma de los dedos gracias a las capas Conv2D y MaxPooling2D. Esta capacidad para procesar la imagen como una matriz bidimensional (28x28x1) resulta en una extracción de atributos mucho más robusta y un aprendizaje más profundo.
+
+En definitiva, la transición de un modelo MLP a una CNN representa un salto cualitativo en la resolución de problemas de visión computacional. Como trabajo futuro, las confusiones específicas detectadas en ciertas letras podrían mitigarse aplicando técnicas adicionales como el aumento de datos (Data Augmentation) o el ajuste de hiperparámetros (como Dropout o regularización), lo que ayudaría a reducir el ligero sobreajuste y llevar el rendimiento del modelo a niveles aún más altos.
