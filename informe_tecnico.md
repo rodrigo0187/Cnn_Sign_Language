@@ -64,11 +64,10 @@ El entrenamiento se realiza con los datos previamente normalizados y organizados
 Para observar su comportamiento se registran los valores de Accuracy y Loss.
 
 ## 4.1 Curvas de aprendizaje
-*(Insertar grafico de accuracy y loss)*
 ![alt text](image.png)
 
 ## 4.2 Analisis del entrenamiento
-*(Describir comportamiento de accuracy y loss a lo largo de las epocas)*
+El modelo aprende casi todo en las primeras 2 épocas. La caída brusca de la pérdida junto con el salto de precisión indica que el problema es relativamente fácil para la arquitectura usada. Las curvas son monótonas y suaves, no hay oscilaciones ni picos, lo que sugiere una buena tasa de aprendizaje.
 
 # 5. Evaluación del modelo CNN
 Accuracy:   0.8299
@@ -96,11 +95,15 @@ En la evaluación 1 se utilizó una red neuronal MLP, que recibía las imágenes
 # 8. Matriz de responsabilidades
 | Integrantes | Responsabilidad |
 | --- | --- |
-| Rodrigo Aedo | (responsabilidad) |
-| Benjamin Figueroa | (responsabilidad) |
-| Martina López | (responsabilidad) |
+| Rodrigo Aedo | Preparación y Diseño de la Arquitectura |
+| Benjamin Figueroa | Experimentación y Entrenamiento |
+| Martina López | Aálisis y Documentación |
 
 # 9. Conclusiones
 El desarrollo de este proyecto permite estudiar las Redes Neuronales Convolucionales en un problema de clasificación de imágenes de lengua de señas.
 
-*(Insertar continuacion de conclusiones acorde a los resultados de las metricas y a la comparacion de redes)*
+A partir de los resultados obtenidos, se concluye que la arquitectura CNN implementada logró un desempeño sólido, alcanzando un accuracy del 81.22% y un F1-score promedio del 83% sobre datos de prueba nunca antes vistos. Esto demuestra que la red es altamente capaz de generalizar e identificar la mayoría de los patrones visuales correspondientes a las 24 clases del abecedario. Sin embargo, el análisis de la matriz de confusión también reveló que el modelo presenta un margen de mejora, ya que experimenta dificultades para diferenciar señas con similitudes espaciales muy finas (como las clases 16, 17, 19 y 21), a diferencia de otras señas visualmente más distintivas (como la clase 'A') donde el acierto es perfecto.
+
+Al comparar la CNN con la arquitectura de Perceptrón Multicapa (MLP) desarrollada en la primera evaluación, la ventaja del enfoque convolucional es evidente. Mientras que el modelo MLP requería aplanar (Flatten) la imagen desde la capa de entrada (perdiendo valiosa información sobre la proximidad y distribución espacial de los píxeles), la CNN logró extraer automáticamente características clave como bordes, texturas y la forma de los dedos gracias a las capas Conv2D y MaxPooling2D. Esta capacidad para procesar la imagen como una matriz bidimensional (28x28x1) resulta en una extracción de atributos mucho más robusta y un aprendizaje más profundo.
+
+En definitiva, la transición de un modelo MLP a una CNN representa un salto cualitativo en la resolución de problemas de visión computacional. Como trabajo futuro, las confusiones específicas detectadas en ciertas letras podrían mitigarse aplicando técnicas adicionales como el aumento de datos (Data Augmentation) o el ajuste de hiperparámetros (como Dropout o regularización), lo que ayudaría a reducir el ligero sobreajuste y llevar el rendimiento del modelo a niveles aún más altos.
