@@ -64,33 +64,57 @@ El entrenamiento se realiza con los datos previamente normalizados y organizados
 Para observar su comportamiento se registran los valores de Accuracy y Loss.
 
 ## 4.1 Curvas de aprendizaje
-![alt text](image.png)
+![alt text](img/output.png)
 
 ## 4.2 Analisis del entrenamiento
-El modelo aprende casi todo en las primeras 2 épocas. La caída brusca de la pérdida junto con el salto de precisión indica que el problema es relativamente fácil para la arquitectura usada. Las curvas son monótonas y suaves, no hay oscilaciones ni picos, lo que sugiere una buena tasa de aprendizaje.
+**loss:** El modelo está minimizando el error de manera rápida y eficiente. No hay indicios de overfitting en la pérdida, ya que la validación acompaña el descenso sin volverse a disparar.
+
+**accuracy:** La red aprendió de manera excelente los patrones espaciales (bordes, formas y posiciones de los dedos) característicos de las 24 clases del abecedario en lengua de señas.
 
 # 5. Evaluación del modelo CNN
-Accuracy:   0.8299
-Precision: 0.8437
-Recall:    0.8299
-F1-Score:  0.8314
+Para evaluar el rendimiento de la Red Neuronal Convolucional se utilizan las métricas de $Accuracy$, $Precision$, $Recall$ y $F1-Score$.
+
+Además se genera una matriz de confusión para identificar las letras clasificadas correctamente y en cuales fallo el reconocimiento.
 
 ## 5.1 Métricas de clasificación 
-*(Insertar metricas)*
+
+Tras evaluar el modelo con el conjunto de prueba (7.172 imágenes independientes que no participaron en el entrenamiento), se obtuvieron los siguientes resultados de rendimiento global:
+
+* **Pérdida (Loss):** 0.8486
+* **Exactitud Global (Accuracy):** 81.22%
+* **Precisión Promedio (Precision - Macro Avg):** 83.00%
+* **Exhaustividad Promedio (Recall - Macro Avg):** 83.00%
+* **F1-Score Promedio (Macro Avg):** 83.00%
+* **F1-Score Ponderado (Weighted Avg):** 85.00%
+
+**Resumen del desempeño:**
+El modelo logra clasificar correctamente el 81.22% del total de las imágenes. Al analizar el equilibrio entre las predicciones correctas sobre el total de predicciones de una clase (Precisión) y la capacidad de encontrar todas las imágenes reales de dicha clase (Recall), el modelo mantiene un F1-Score general del 83%. 
+
+El hecho de que el F1-Score ponderado (85%) sea ligeramente superior al promedio macro (83%) indica que el modelo tiene un rendimiento un poco mejor en las clases que poseen mayor cantidad de muestras, pero mantiene un nivel de predicción robusto y equilibrado para la gran mayoría de las categorías del abecedario en lengua de señas.
 
 ## 5.2 Matriz de confusión
-![alt text](cm.png)
+![alt text](img/image.png)
 
 ## 5.3 Analisis de predicción 
-*(Seleccionar ejemplos de imagenes clasificados correctamente e incorrectamente para ver el comportamiento del modelo)*
+![alt text](img/image-1.png)
 
 # 6. Comparación entre MLP y CNN
 En la evaluación 1 se utilizó una red neuronal MLP, que recibía las imágenes transformadas en valores númericos, mientras que la red neuronal CNN procesa las imágenes conservando su estructura, permitiendo aplicar filtros para extraer características visuales.
 
-*(Insertar comparación entre metricas, el tipo de arquitectura y cantidad de parametros)*
+![alt text](/img/comparasion.png)
+
+| Criterio | MLP | CNN |
+|---|---|---|
+| Desempeño en test | Inferior en las métricas obtenidas | Superior en las métricas obtenidas |
+| Parámetros entrenables | 110.296 | 1.388.312 |
+| Tiempo de inferencia medido | Menor (aprox. 0,2706 s por el lote) | Mayor (aprox. 0,6920 s por el lote) |
+| Tratamiento de la imagen | Aplana la imagen y aprende relaciones entre píxeles | Usa filtros convolucionales para extraer patrones espaciales |
+| Ventaja principal | Más liviano y rápido | Mejor desempeño para reconocer patrones visuales |
+| Desventaja principal | Pierde la estructura espacial explícita al aplanar la imagen | Mayor costo computacional y más parámetros |
 
 # 7. Visualización de mapa de características
-*(Insertar Feature Maps)*
+![alt text](/img/image-2.png)
+![alt text](/img/image-3.png)
 
 # 8. Matriz de responsabilidades
 | Integrantes | Responsabilidad |
